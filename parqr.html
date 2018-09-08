@@ -17,24 +17,27 @@
 			<form class="w3-container">
 				<br/>	
 				<!--Tipo de operaci&oacute;n: <input type="text" required id="ot"><br/>-->
-				Motivo de pago: 		<input class="w3-input	" type="text" oninput="validateLength(3, 10, 'alias')" id="alias"><a id= "aliasError"></a><br/>
-				Cuenta CLABE: (listo)	<input class="w3-input	" type="text" oninput="validateLength(10, 20, 'cl')" required id="cl"> <a id = "clError"></a><br/>
+				Motivo de pago: 						<input class="w3-input	" type="text" oninput="validateLength(3, 10, 'alias')" id="alias"><a id= "aliasError"></a><br/>
+				Cuenta CLABE:							<input class="w3-input	" type="text" oninput="validateLength(10, 20, 'cl')" required id="cl"> <a id = "clError"></a><br/>
 				<!--Tipo de cuenta: <input type="text" required id="type"><br/>-->
-				Tipo de cuenta: <select id = "type">
-					<option value = "TC">Tarjeta</option>
-					<option value = "CL">Clabe interbancaria</option>
-				</select><br/><br/>
+				Tipo de cuenta: 						<select id = "type">
+															<option value = "TC">Tarjeta</option>
+															<option value = "CL">Clabe interbancaria</option>
+														</select>
+														<br/><br/>
 				Referencia num&eacute;rica: 			<input class="w3-input	" oninput="validateLength(6, 7,'refn')" type="text" id="refn"><a id ="refnError"></a><br/>
 				Nombre de beneficiario (sin apellidos): <input class="w3-input	" type="text" oninput="validateLength(3, 20, 'refa')" required id="refa"><a id = "refaError"></a><br/>
 				Monto a transferir: 					<input class="w3-input	" type="number" min="10" max="10000" onchange="validateAmount()" oninput="validateDecimals()"  step = any id="amount"><br/>
 				<!--Clave del banco: <input type="text" required id="bank"><br/>-->
-				Pa&iacute;s: <select id = "country">
-					<option value = "MX">M&eacute;xico</option>
-					<option value = "US">Estados Unidos</option>
-				</select><br/><br/>
-				Divisa: <select id = "currency">
-					<option value = "MXN">(MXN) Pesos Mexicanos</option>
-				</select><br/><br/>
+				Pa&iacute;s: 							<select id = "country">
+															<option value = "MX">M&eacute;xico</option>
+															<option value = "US">Estados Unidos</option>
+														</select>
+														<br/><br/>
+				Divisa:									<select id = "currency">
+															<option value = "MXN">(MXN) Pesos Mexicanos</option>
+														</select>
+														<br/><br/>
 			</form>
 			<button  class="w3-btn w3-indigo w3-round-xlarge w3-hover-teal" type="button" onclick = parse()>Generar<a id = "genError"></a></button>
 			<div id="popup" class="w3-modal">
@@ -44,8 +47,8 @@
 						<h5 class="w3-center">Aqui esta tu código QR</h5>
 					</header>
 					<center>
-						<div class="w3-padding" id="qrcode">
-					</div>	
+						<div class="w3-padding" id="qrcode"></div>	
+
 					</center>
 				</div>
 			</div>
