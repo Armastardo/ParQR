@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<meta charset="utf-8"/>
+	<meta charset="utf-8"content="width=device-width, initial-scale=1"/>
 	<title>ParQR</title>
 	<script type="text/javascript" src = "qrcode.js"></script>
 	 <link rel="stylesheet" href="w3.css"> 
@@ -14,7 +14,7 @@
 			<header class="w3-container w3-blue">
 			  <h4>¡Bienvenido! / Por favor escriba la información para la transacción</h4	>
 			</header>
-			<form class="w3-container">
+			<form name="entrada" class="w3-container">
 				<br/>	
 				<!--Tipo de operaci&oacute;n: <input type="text" required id="ot"><br/>-->
 				Motivo de pago: 						<input class="w3-input	" type="text" oninput="validateLength(3, 10, 'alias')" id="alias"><a id= "aliasError"></a><br/>
@@ -90,9 +90,12 @@
 	function validateAmount(){
 		var amount = document.getElementById("amount").value;
 		
-		if(amount < 10){
-			amount = 10;
-			document.getElementById("amount").value = amount;
+		if(amount != ""){
+			
+			if(amount < 10){
+				amount = 10;
+				document.getElementById("amount").value = amount;
+			}	
 		}
 	}
 
@@ -130,17 +133,30 @@
 
 		var dict = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		var string = document.getElementById(source).value;
-		for (var i = 0; i < string.length; i++){
+		for (var i = 1; i < string.length; i++){
 			if(!dict.includes(string[i])){
 				console.log("Hay caracteres especiales!")
 				errorString = true;
 			}
 		}
+
 		return errorString;
 	}
 
+	function validateForm(){
+		var x = document.forms["entrada"];
+
+	    for(var i = 1; i < x.length ; i++){
+	    	if(i == 3) i++;
+	    	if(i == 5) i++;
+	    	if(x[i].value.length < 1){
+	    		return false;
+	    	}
+	    }
+	    return true;
+	}
+
 	function parse(){
-		//var ot = document.getElementById("ot").value;
 		var alias = document.getElementById("alias").value;
 		var cl = document.getElementById("cl").value;
 		var type = document.getElementById("type").value;
@@ -151,8 +167,10 @@
 		var currency = document.getElementById("currency").value;
 
 		if(!error && !validateInput("alias")){
-			var parsed = '{"ot": "0001","dOp": [{"alias": "' + alias + '"},{"cl": "' + cl + '"},{"type": "' + type +'"},{"refn": "' + refn + '"},{"refa": "' + refa + '"},{"amount": "' + amount + '"},{"bank": "00012"},{"country": "' + country +'"},{"currency": "'+ currency +'"}]}';
-			generarQR(parsed);
+			if(validateForm()){
+				var parsed = '{"ot": "0001","dOp": [{"alias": "' + alias + '"},{"cl": "' + cl + '"},{"type": "' + type +'"},{"refn": "' + refn + '"},{"refa": "' + refa + '"},{"amount": "' + amount + '"},{"bank": "00012"},{"country": "' + country +'"},{"currency": "'+ currency +'"}]}';
+				generarQR(parsed);	
+			}		
 		}else{
 			console.log("ERROR");
 		}
