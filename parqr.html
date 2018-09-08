@@ -38,14 +38,15 @@
 			</form>
 			<button  class="w3-btn w3-indigo w3-round-xlarge w3-hover-teal" type="button" onclick = parse()>Generar<a id = "genError"></a></button>
 			<div id="popup" class="w3-modal">
-				<div class="w3-modal-content w3-card-4 w3-animate-zoom w3-display-container">
-					<header class="w3-container w3-blue w3-display-">
-						<span onclick="document.getElementById('popup').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-						<h5>Aqui esta tu código QR</h5>
+				<div class="w3-modal-content w3-card-4 w3-animate-zoom">
+					<header class="w3-container w3-blue">
+						<span onclick="document.getElementById('popup').style.display='none'" class="w3-button w3-teal w3-display-topright">&times;</span>
+						<h5 class="w3-center">Aqui esta tu código QR</h5>
 					</header>
-					<div class="w3-center w3-display-middle">
-						<a id="qrcode"></a>	
-					</div>
+					<center>
+						<div class="w3-padding" id="qrcode">
+					</div>	
+					</center>
 				</div>
 			</div>
 		</div>
@@ -138,8 +139,6 @@
 		    colorLight : "#ffffff",
 		    correctLevel : QRCode.CorrectLevel.H
 		});
-
-
 	}
 </script>
 
