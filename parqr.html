@@ -2,7 +2,11 @@
 <html>
 
 <head>
+<<<<<<< HEAD
 	<meta charset="utf-8"content="width=device-width, initial-scale=1"/>
+=======
+	<meta charset="utf-8" content="width=device-width, initial-scale=1"/>
+>>>>>>> 31a9fd15ca4c30948633798a83cf0ec9998dbe78
 	<title>ParQR</title>
 	<script type="text/javascript" src = "qrcode.js"></script>
 	 <link rel="stylesheet" href="w3.css"> 
@@ -48,6 +52,7 @@
 					</header>
 					<center>
 <<<<<<< HEAD
+<<<<<<< HEAD
 						<div class="w3-padding" id="qrcode"></div></center>
 =======
 						<div class="w3-padding" id="qrcode"></div>	
@@ -69,6 +74,29 @@
 						Divisa:									<select id = "currency">
 															<option value = "MXN">(MXN) Pesos Mexicanos</option>
 														</select>
+=======
+						<div class="w3-padding" id="qrcode"></div>
+						<div id="inf">
+							Motivo de pago: 						<input class="w3-input	" type="text" oninput="validateLength(3, 10, 'alias')" id="alias"><a id= "aliasError"></a><br/>
+							Cuenta CLABE:							<input class="w3-input	" type="text" oninput="validateLength(10, 20, 'cl')" required id="cl"> <a id = "clError"></a><br/>
+							<!--Tipo de cuenta: <input type="text" required id="type"><br/>-->
+							Tipo de cuenta: 						<select id = "type">
+																<option value = "TC">Tarjeta</option>
+																<option value = "CL">Clabe interbancaria</option>
+															</select>
+							Referencia num&eacute;rica: 			<input class="w3-input	" oninput="validateLength(6, 7,'refn')" type="text" id="refn"><a id ="refnError"></a><br/>
+							Nombre de beneficiario (sin apellidos): <input class="w3-input	" type="text" oninput="validateLength(3, 20, 'refa')" required id="refa"><a id = "refaError"></a><br/>
+							Monto a transferir: 					<input class="w3-input	" type="number" min="10" max="10000" onchange="validateAmount()" oninput="validateDecimals()"  step = any id="amount"><br/>
+					<!--Clave del banco: <input type="text" required id="bank"><br/>-->
+							Pa&iacute;s: 					<select id = "country">
+																<option value = "MX">M&eacute;xico</option>
+																<option value = "US">Estados Unidos</option>
+															</select>
+							Divisa:									<select id = "currency">
+																<option value = "MXN">(MXN) Pesos Mexicanos</option>
+															</select>
+						</div>
+>>>>>>> 31a9fd15ca4c30948633798a83cf0ec9998dbe78
 					</center>
 				</div>
 			</div>
@@ -181,6 +209,7 @@
 		document.getElementById("popup").style.display='block';
 		qrcode.clear();
 		qrcode.makeCode(parsed);
+
 	}
 </script>
 
