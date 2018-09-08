@@ -10,10 +10,14 @@
 
 <body>
 	<div class="w3-container w3-padding-large">
-		<div class="w3-card-2 w3-white">
+		<div class="w3-card-2">
+			<header class="w3-container w3-blue">
+			  <h4>¡Bienvenido! / Por favor escriba la información para la transacción</h4	>
+			</header>
 			<form class="w3-container">
+				<br/>	
 				<!--Tipo de operaci&oacute;n: <input type="text" required id="ot"><br/>-->
-				Motivo de pago: <input class="w3-input	" type="text" oninput="validateLength(3, 10, 'alias')" id="alias"><a id= "aliasError"></a><br/>
+				Motivo de pago: 		<input class="w3-input	" type="text" oninput="validateLength(3, 10, 'alias')" id="alias"><a id= "aliasError"></a><br/>
 				Cuenta CLABE: (listo)	<input class="w3-input	" type="text" oninput="validateLength(10, 20, 'cl')" required id="cl"> <a id = "clError"></a><br/>
 				<!--Tipo de cuenta: <input type="text" required id="type"><br/>-->
 				Tipo de cuenta: <select id = "type">
