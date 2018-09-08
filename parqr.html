@@ -37,7 +37,17 @@
 				</select><br/><br/>
 			</form>
 			<button  class="w3-btn w3-indigo w3-round-xlarge w3-hover-teal" type="button" onclick = parse()>Generar<a id = "genError"></a></button>
-			<a id="qrcode"></a>
+			<div id="popup" class="w3-modal">
+				<div class="w3-container-modal">
+					<div class="w3-card-2 w3-container">
+						<span onclick="document.getElementById('popup').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+						<header class="w3-container w3-blue">
+							<h5>Aqui esta tu código QR</h5>
+						</header>
+						<a id="qrcode"></a>	
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
@@ -112,11 +122,15 @@
 		if(!error && !validateInput("alias")){
 			var parsed = '{"ot": "0001","dOp": [{"alias": "' + alias + '"},{"cl": "' + cl + '"},{"type": "' + type +'"},{"refn": "' + refn + '"},{"refa": "' + refa + '"},{"amount": "' + amount + '"},{"bank": "00012"},{"country": "' + country +'"},{"currency": "'+ currency +'"}]}';
 			console.log(parsed);
-			var qrcode = new QRCode(document.getElementById("qrcode"), parsed);
+			generarQR(parsed);
 		}else{
 			console.log("ERROR");
 		}
-
+	}
+	function generarQR(parsed)
+	{
+		document.getElementById("popup").style.display='block';
+		var qrcode = new QRCode(document.getElementById("qrcode"), parsed);
 	}
 </script>
 
