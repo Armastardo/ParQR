@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8"/>
+	<title>ParQR</title>
+	<script type="text/javascript" src = "qrcode.js"></script>
+	 <link rel="stylesheet" href="w3.css"> 
+</head>
+
+<body>
+	<div class="w3-container w3-padding-large">
+		<div class="w3-card-2">
+			<header class="w3-container w3-blue">
+			  <h4>¡Bienvenido! / Por favor escriba la información para la transacción</h4	>
+			</header>
+			<form class="w3-container">
+				<br/>	
+				<!--Tipo de operaci&oacute;n: <input type="text" required id="ot"><br/>-->
+				Motivo de pago: 		<input class="w3-input	" type="text" oninput="validateLength(3, 10, 'alias')" id="alias"><a id= "aliasError"></a><br/>
+				Cuenta CLABE: (listo)	<input class="w3-input	" type="text" oninput="validateLength(10, 20, 'cl')" required id="cl"> <a id = "clError"></a><br/>
+				<!--Tipo de cuenta: <input type="text" required id="type"><br/>-->
+				Tipo de cuenta: <select id = "type">
+					<option value = "TC">Tarjeta</option>
+					<option value = "CL">Clabe interbancaria</option>
+				</select><br/><br/>
+				Referencia num&eacute;rica: 			<input class="w3-input	" oninput="validateLength(6, 7,'refn')" type="text" id="refn"><a id ="refnError"></a><br/>
+				Nombre de beneficiario (sin apellidos): <input class="w3-input	" type="text" oninput="validateLength(3, 20, 'refa')" required id="refa"><a id = "refaError"></a><br/>
+				Monto a transferir: 					<input class="w3-input	" type="number" min="10" max="10000" onchange="validateAmount()" oninput="validateDecimals()"  step = any id="amount"><br/>
+				<!--Clave del banco: <input type="text" required id="bank"><br/>-->
+				Pa&iacute;s: <select id = "country">
+					<option value = "MX">M&eacute;xico</option>
+					<option value = "US">Estados Unidos</option>
+				</select><br/><br/>
+				Divisa: <select id = "currency">
+					<option value = "MXN">(MXN) Pesos Mexicanos</option>
+				</select><br/><br/>
+			</form>
+			<button  class="w3-btn w3-indigo w3-round-xlarge w3-hover-teal" type="button" onclick = parse()>Generar<a id = "genError"></a></button>
+			<a id="qrcode"></a>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+	var error = false;
+
+	function validateAmount(){
+		var amount = document.getElementById("amount").value;
+		
+		if(amount < 10){
+			amount = 10;
+			document.getElementById("amount").value = amount;
+		}
+	}
+
+	function validateDecimals(){
+		var amount = document.getElementById("amount").value;
+
+		amount = amount.split(".")
+		if(amount.length > 1){
+			if (amount[1].length > 2){
+				amount[1] = amount[1][0] +""+amount[1][1];
+				var newAmount = amount[0]+"."+amount[1];
+				document.getElementById("amount").value = newAmount;
+			}	
+		}
+
+	}
+
+	function validateLength(min, max, source){
+	    var string = document.getElementById(source);
+
+	    if(!string.hasAttribute("required") && string.value.length == 0){
+	    	document.getElementById(source+"Error").innerHTML = "";
+	    }else if(string.value.length < min || string.value.length > max){
+	    	document.getElementById(source+"Error").innerHTML = "La longitud de este campo debe ser mayor a " +min+ " y menor a " + max;
+	    	error = true;
+	    }else{
+	    	document.getElementById(source+"Error").innerHTML = "";
+	    	error = false;
+	    }
+	    return error;
+	}
+
+	function validateInput(source){
+		var errorString = false;
+
+		var dict = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		var string = document.getElementById(source).value;
+		for (var i = 0; i < string.length; i++){
+			if(!dict.includes(string[i])){
+				console.log("Hay caracteres especiales!")
+				errorString = true;
+			}
+		}
+		return errorString;
+	}
+
+	function parse(){
+		//var ot = document.getElementById("ot").value;
+		var alias = document.getElementById("alias").value;
+		var cl = document.getElementById("cl").value;
+		var type = document.getElementById("type").value;
+		var refn = document.getElementById("refn").value;
+		var refa = document.getElementById("refa").value;
+		var amount = document.getElementById("amount").value;
+		var country = document.getElementById("country").value;
+		var currency = document.getElementById("currency").value;
+
+
+		if(!error && !validateInput("alias")){
+			var parsed = '{"ot": "0001","dOp": [{"alias": "' + alias + '"},{"cl": "' + cl + '"},{"type": "' + type +'"},{"refn": "' + refn + '"},{"refa": "' + refa + '"},{"amount": "' + amount + '"},{"bank": "00012"},{"country": "' + country +'"},{"currency": "'+ currency +'"}]}';
+			console.log(parsed);
+			var qrcode = new QRCode(document.getElementById("qrcode"), parsed);
+		}else{
+			console.log("ERROR");
+		}
+
+	}
+</script>
+
+</html>
