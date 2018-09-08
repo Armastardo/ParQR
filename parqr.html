@@ -47,9 +47,7 @@
 						<h5 class="w3-center">Aqui esta tu código QR</h5>
 					</header>
 					<center>
-						<div class="w3-padding" id="qrcode"></div>	
-
-					</center>
+						<div class="w3-padding" id="qrcode"></div></center>
 				</div>
 			</div>
 		</div>
@@ -141,7 +139,6 @@
 	function generarQR(parsed){
 		
 		document.getElementById("popup").style.display='block';
-			console.log(parsed);
 		qrcode.clear();
 		qrcode.makeCode(parsed);
 	}
