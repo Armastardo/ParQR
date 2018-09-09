@@ -87,6 +87,10 @@
 	    correctLevel : QRCode.CorrectLevel.H
 	});
 
+	function cambiarDivisa(){
+		document.getElementById("currency").selectedIndex = document.getElementById("country").selectedIndex;
+	}
+
 	function validateAmount(){
 		var amount = document.getElementById("amount").value;
 		
