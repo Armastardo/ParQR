@@ -14,11 +14,13 @@
 </head>
 
 <body style='background-color:#EAF9FA ;'>
-	<div class="w3-container w3-padding-large">
-		<div class="w3-card-2" style="background-color: #F4F4F4 ;">
+	<div class="w3-row w3-padding-large">
+		<div class="w3-col s1 m2 l3"><br></div>
+		<div class="w3-col s10 m8 l6 w3-card-2 w3-center" style="background-color: #F4F4F4 ;">
 			<header class="w3-container w3-blue">
 			  <h4>¡Bienvenido! / Por favor escriba la información para la transacción</h4	>
 			</header>
+			<table class="w3-table"><tr><td>
 			<form name="entrada" class="w3-container">
 				<br/>	
 				<!--Tipo de operaci&oacute;n: <input type="text" required id="ot"><br/>-->
@@ -45,7 +47,9 @@
 														</select>
 														<br/><br/>
 			</form>
-			<button  class="w3-btn w3-indigo w3-round-xlarge w3-center" type="button" onclick = "parse();">Generar<a id = "genError"></a></button>
+			<center><button  class="w3-btn w3-blue w3-round w3-center" type="button" style="background-color: #ffffff;" onclick = "parse();">Generar<a id = "genError"></a></button></center>
+			<br><br>
+			</td></tr></table>
 			<center>
 			<div id="popup" class="w3-modal w3-padding">
 
@@ -53,21 +57,22 @@
 						<tr><td>
 								<div class="w3-modal-content w3-card-4 w3-animate-opacity">
 									
-										<header class="w3-container w3-blue w3-display-top">
-											<div style="height: initial;" onclick= "document.getElementById('popup').style.display='none'" class="w3-button w3-blue w3-display-topright">&times;</div>
-											<h5 class="w3-center">Aqui esta tu código QR</h5>
-										</header>
-										<br/>
+									<header class="w3-container w3-blue w3-display-top">
+										<div style="height: initial;" onclick= "document.getElementById('popup').style.display='none'" class="w3-button w3-blue w3-display-topright">&times;</div>
+										<h5 class="w3-center">Aqui esta tu código QR</h5>
+									</header>
+									<br/>
 									<div class="w3-padding w3-center">
 										<center><div class="w3-padding" id="qrcode"></div></center>
 										<div id="inf"></div>
-										<button type="button" class="w3-btn w3-blue" onclick="generatePDF(getQrImage());">Descargar como pdf...</button>	
+										<button type="button" class="w3-btn w3-blue w3-round" onclick="generatePDF(getQrImage());">Descargar como pdf...</button>	
 										<br/><br/>
 									</div>
 								</div>
 						</td></tr>
 					</table>
 			</div>
+		<div class="w3-col s1 m2 l3"><br></div>
 		</center>
 		</div>
 	</div>
