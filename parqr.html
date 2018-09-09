@@ -203,16 +203,42 @@
 					"</table><br>";
 		info.innerHTML = str;
 
-		var qrImage = getQrImage();
+		//onclick="generatePDF(getQrImage());"
+	}
+
+	function generatePDF(image){
+
 
 		var doc = new jsPDF();
 
-		doc.setFontSize(40);
-		doc.text(35, 25, 'PDF Generado');
-		doc.addImage(qrImage, 'JPEG', 15, 40, 160, 160);
-		doc.save('a4.pdf');
-	}
+		doc.setFontSize(20);
+		doc.text(35, 25, 'Código generado por ParQR');
+		doc.addImage(image, 'JPEG', 40, 40, 130, 130);
+		
 
+		var alias = document.getElementById("alias").value;
+		if(alias.length==0)	
+			alias = "No especificado";
+		var refn = document.getElementById("refn").value;
+		if(refn.length==0)	
+			refn = "No especificado";
+		var amount = document.getElementById("amount").value;
+		if(amount.length==0)	
+			amount = "No especificado";
+		
+		doc.setFontSize(15);
+		
+		doc.text(35, 207, "Motivo de pago: " + alias);
+		doc.text(35, 214, "CLABE: " + document.getElementById("cl").value);
+		doc.text(35, 221, "Cuenta: " + document.getElementById("type").value);
+		doc.text(35, 228, "Referencia: " + refn);
+		doc.text(35, 235, "Beneficiario: "+document.getElementById("refa").value);
+		doc.text(35, 242, "Monto: " + amount);
+		doc.text(35, 249, "País: " + document.getElementById("country").value);
+		doc.text(35, 256, "Divisa: " + document.getElementById("currency").value);
+		doc.save('a4.pdf');
+
+	}
 
 	function getQrImage() {
 	    var allImages = document.getElementsByTagName("img");
