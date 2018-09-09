@@ -45,7 +45,7 @@
 														</select>
 														<br/><br/>
 			</form>
-			<button  class="w3-btn w3-indigo w3-round-xlarge w3-center" type="button" onclick = parse()>Generar<a id = "genError"></a></button>
+			<button  class="w3-btn w3-indigo w3-round-xlarge w3-center" type="button" onclick = "parse();">Generar<a id = "genError"></a></button>
 			<div id="popup" class="w3-modal w3-padding">
 				<table class="w3-responsive" style="padding-left: 40%;">
 						<tr><td>
@@ -59,6 +59,7 @@
 									<div class="w3-padding">
 										<center><div class="w3-padding" id="qrcode"></div></center>
 										<div id="inf"></div>
+										<button type="button" class="w3-btn w3-blue" onclick="generatePDF(getQrImage());">Descargar como pdf...</button>	
 									</div>
 								</div>
 						</td></tr>
@@ -193,7 +194,7 @@
 		if(amount.length==0)	
 			amount = "N/a";
 		var info = document.getElementById("inf");
-		var str = 	'<br><table class="w3-table w3-bordered">'			+
+		var str = 	'<br><table class="w3-table w3-bordered">'												+
 					"<tr><td>Motivo de pago: </td><td>" 	+ alias											+	"</td></tr>"	+
 					"<tr><td>CLABE: </td><td>"				+ document.getElementById("cl").value			+	"</td></tr>"	+		
 					"<tr><td>Cuenta: </td><td>" 			+ document.getElementById("type").value			+	"</td></tr>"	+		
@@ -257,7 +258,3 @@
 </script>
 
 </html>
-
-
-
-
