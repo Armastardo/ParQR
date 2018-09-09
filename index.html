@@ -12,30 +12,29 @@
 	 <link rel="stylesheet" href="w3.css"> 
 	 <!--href="w3.css"-->
 </head>
-
-<body style='background-color:#EAF9FA ;'>
+<body style='background-image: url("fondo3.png");background-size: cover ;'>
 	<div class="w3-row w3-padding-large">
 		<div class="w3-col s1 m2 l3"><br></div>
 		<div class="w3-col s10 m8 l6 w3-card-2 w3-center" style="background-color: #F4F4F4 ;">
 			<header class="w3-container w3-blue">
-			  <h4>¡Bienvenido al generador de códigos QR BBVA Bancomer!</h4	>
+			  <h4>¡Bienvenido al generador de códigos QR BBVA Bancomer!</h4>
 			</header>
 			<table class="w3-table"><tr><td>
-			<form name="entrada" class="w3-container">
-				<br/>
-				<table class="w3-table">
+
+				<form name="entrada">
+				<table class="w3-table">			
 				<!--Tipo de operaci&oacute;n: <input type="text" required id="ot"><br/>-->
 				<tr>
-					<td colspan="2">Motivo de pago:</td>
+					<td>Motivo de pago:</td>
 				</tr> 						
 				<tr>
-					<td colspan="2"><input class="w3-input	" type="text" oninput="validateLength(3, 10, 'alias')" id="alias"><a id= "aliasError"></a></td>
+					<td><input class="w3-input	" type="text" oninput="validateLength(3, 10, 'alias')" id="alias"><a id= "aliasError"></a></td>
 				</tr>
 				<tr>
-					<td colspan="2">Cuenta CLABE:</td>
+					<td>Cuenta CLABE:</td>
 				</tr>							
 				<tr>
-					<td colspan="2"><input class="w3-input	" type="text" oninput="validateLength(10, 20, 'cl')" required id="cl"> <a id = "clError"></a></td>
+					<td><input class="w3-input	" type="text" oninput="validateLength(10, 20, 'cl')" required id="cl"> <a id = "clError"></a></td>
 				</tr>
 				<!--Tipo de cuenta: <input type="text" required id="type"><br/>-->
 				<tr>
@@ -75,16 +74,15 @@
 																			<option calue = "USD">(USD) D&oacute;lares</option>
 																	</select></td>
 				</tr>
-				<tr>
-					<td><center><button  class="w3-btn w3-blue w3-round w3-center" type="button" style="background-color: #ffffff;" onclick = "parse();"> 	- Generar - <a id = "genError"></a></button></center></td>
-				</tr>
 				</table>
-			</form>
+				</form>
+				<center>
+					<button  class="w3-btn w3-blue w3-round w3-center" type="button" style="background-color: #ffffff;" onclick = "parse();"> 	- Generar - <a id = "genError"></a></button>
+				</center>
 			</td></tr></table>
 			<center>
-			<div id="popup" class="w3-modal w3-padding">
-
-				<table>
+				<div id="popup" class="w3-modal w3-padding">
+					<table>
 						<tr><td>
 								<div class="w3-modal-content w3-card-4 w3-animate-opacity">
 									
@@ -102,10 +100,10 @@
 								</div>
 						</td></tr>
 					</table>
-			</div>
-		<div class="w3-col s1 m2 l3"><br></div>
-		</center>
+				</div>
+			</center>
 		</div>
+		<div class="w3-col s1 m2 l3"><br></div>
 	</div>
 </body>
 
