@@ -34,13 +34,14 @@
 				Nombre de beneficiario (sin apellidos): <input class="w3-input	" type="text" oninput="validateLength(3, 20, 'refa')" required id="refa"><a id = "refaError"></a><br/>
 				Monto a transferir: 					<input class="w3-input	" type="number" onchange="validateAmount()" oninput="validateDecimals()"  step = any id="amount"><br/>
 				<!--Clave del banco: <input type="text" required id="bank"><br/>-->
-				Pa&iacute;s: 							<select id = "country">
+				Pa&iacute;s: 							<select onchange = "cambiarDivisa()" id = "country">
 															<option value = "MX">M&eacute;xico</option>
 															<option value = "US">Estados Unidos</option>
 														</select>
 														<br/><br/>
 				Divisa:									<select id = "currency">
 															<option value = "MXN">(MXN) Pesos Mexicanos</option>
+															<option calue = "USD">(USD) D&oacute;lares</option>
 														</select>
 														<br/><br/>
 			</form>
