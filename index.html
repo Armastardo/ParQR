@@ -45,8 +45,10 @@
 														<br/><br/>
 			</form>
 			<button  class="w3-btn w3-indigo w3-round-xlarge w3-center" type="button" onclick = "parse();">Generar<a id = "genError"></a></button>
+			<center>
 			<div id="popup" class="w3-modal w3-padding">
-				<table class="w3-responsive" style="padding-left: 40%;">
+
+				<table class="w3-responsive" >
 						<tr><td>
 								<div class="w3-modal-content w3-card-4 w3-animate-opacity">
 									
@@ -55,15 +57,17 @@
 											<h5 class="w3-center">Aqui esta tu código QR</h5>
 										</header>
 										<br/>
-									<div class="w3-padding">
+									<div class="w3-padding w3-center">
 										<center><div class="w3-padding" id="qrcode"></div></center>
 										<div id="inf"></div>
 										<button type="button" class="w3-btn w3-blue" onclick="generatePDF(getQrImage());">Descargar como pdf...</button>	
+										<br/><br/>
 									</div>
 								</div>
 						</td></tr>
 					</table>
 			</div>
+		</center>
 		</div>
 	</div>
 </body>
