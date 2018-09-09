@@ -65,7 +65,7 @@
 									<div class="w3-padding w3-center">
 										<center><div class="w3-padding" id="qrcode"></div></center>
 										<div id="inf"></div>
-										<button type="button" class="w3-btn w3-blue w3-round" onclick="generatePDF(getQrImage());">Descargar como pdf...</button>	
+										<button type="button" class="w3-btn w3-blue w3-round" onclick="generatePDF(getQrImage());">Descargar como PDF</button>	
 										<br/><br/>
 									</div>
 								</div>
@@ -252,8 +252,8 @@
 		doc.text(35, 242, "Monto: " + amount);
 		doc.text(35, 249, "País: " + document.getElementById("country").value);
 		doc.text(35, 256, "Divisa: " + document.getElementById("currency").value);
-		doc.save('a4.pdf');
-
+		
+		doc.save('Transfer'+document.getElementById("cl").value+'.pdf');
 	}
 
 	function getQrImage() {
