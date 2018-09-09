@@ -2,7 +2,8 @@
 <html>
 
 <head>
-	<meta charset="utf-8"content="width=device-width, initial-scale=1"/>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>ParQR</title>
 	<script type="text/javascript" src = "qrcode.js"></script>
 	 <link rel="stylesheet" href="w3.css"> 
@@ -46,11 +47,15 @@
 						<span onclick= "document.getElementById('popup').style.display='none'" class="w3-button w3-teal w3-display-topright">&times;</span>
 						<h5 class="w3-center">Aqui esta tu código QR</h5>
 					</header>
-					<center>
+					
 						<br/>
-						<div class="w3-padding" id="qrcode"></div>
-						<div class="w3-white" id="inf"></div>
-					</center>
+						<center><div class="w3-padding" id="qrcode"></div></center>
+						<div class="w3-row">
+							<div class="w3-col s4"><br></div>
+							<div class="w3-col s4" id="inf"></div>
+							<div class="w3-col s4"><br></div>
+						</div>
+					
 				</div>
 			</div>
 		</div>
@@ -61,8 +66,8 @@
 	var error = false;
 	var qrcode = new QRCode(document.getElementById("qrcode"), {
 	    text: "¡Hola!",
-	    width: 150,
-	    height: 150,
+	    width: 256,
+	    height: 256,
 	    colorDark : "#000000",
 	    colorLight : "#ffffff",
 	    correctLevel : QRCode.CorrectLevel.H
@@ -173,14 +178,16 @@
 		if(amount.length==0)	
 			amount = "N/a";
 		var info = document.getElementById("inf");
-		var str = 	"<br>Motivo de pago: " 	+ alias											+	"<br>"	+
-					"CLABE: "				+ document.getElementById("cl").value			+	"<br>"	+		
-					"Cuenta: " 			 	+ document.getElementById("type").value			+	"<br>"	+		
-					"Referencia: " 		 	+ refn											+	"<br>"	+	
-					"Beneficiario: " 		+ document.getElementById("refa").value			+	"<br>"	+
-					"Monto a transferir: "  + amount										+	"<br>"	+
-					"País: " 				+ document.getElementById("country").value		+	"<br>"	+
-					"Divisa: "            	+ document.getElementById("currency").value		+	"<br><br>";
+		var str = 	'<br><table class="w3-table w3-bordered">'			+
+					"<tr><td>Motivo de pago: </td><td>" 	+ alias											+	"</td></tr>"	+
+					"<tr><td>CLABE: </td><td>"				+ document.getElementById("cl").value			+	"</td></tr>"	+		
+					"<tr><td>Cuenta: </td><td>" 			+ document.getElementById("type").value			+	"</td></tr>"	+		
+					"<tr><td>Referencia: </td><td>" 		+ refn											+	"</td></tr>"	+	
+					"<tr><td>Beneficiario: </td><td>" 		+ document.getElementById("refa").value			+	"</td></tr>"	+
+					"<tr><td>Monto a transferir: </td><td>" + amount										+	"</td></tr>"	+
+					"<tr><td>País: </td><td>" 				+ document.getElementById("country").value		+	"</td></tr>"	+
+					"<tr><td>Divisa: </td><td>"            	+ document.getElementById("currency").value		+	"</td></tr>"	+
+					"</table><br>";
 		info.innerHTML = str;
 	}
 
