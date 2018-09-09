@@ -1,1 +1,262 @@
-<a href = "parqr.html">Entrar</a>
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ParQR</title>
+	<script type="text/javascript" src = "qrcode.js"></script>
+	<script type="text/javascript" src = "jspdf.min.js"></script>
+
+	 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3mobile.css"> 
+	 <link rel="stylesheet" href="w3.css"> 
+	 <!--href="w3.css"-->
+</head>
+
+<body style='background-color:#EAF9FA ;'>
+	<div class="w3-container w3-padding-large">
+		<div class="w3-card-2" style="background-color: #F4F4F4 ;">
+			<header class="w3-container w3-blue">
+			  <h4>¡Bienvenido! / Por favor escriba la información para la transacción</h4	>
+			</header>
+			<form name="entrada" class="w3-container">
+				<br/>	
+				<!--Tipo de operaci&oacute;n: <input type="text" required id="ot"><br/>-->
+				Motivo de pago: 						<input class="w3-input	" type="text" oninput="validateLength(3, 10, 'alias')" id="alias"><a id= "aliasError"></a><br/>
+				Cuenta CLABE:							<input class="w3-input	" type="text" oninput="validateLength(10, 20, 'cl')" required id="cl"> <a id = "clError"></a><br/>
+				<!--Tipo de cuenta: <input type="text" required id="type"><br/>-->
+				Tipo de cuenta: 						<select id = "type">
+															<option value = "TC">Tarjeta</option>
+															<option value = "CL">Clabe interbancaria</option>
+														</select>
+														<br/><br/>
+				Referencia num&eacute;rica: 			<input class="w3-input	" oninput="validateLength(6, 7,'refn')" type="text" id="refn"><a id ="refnError"></a><br/>
+				Nombre de beneficiario (sin apellidos): <input class="w3-input	" type="text" oninput="validateLength(3, 20, 'refa')" required id="refa"><a id = "refaError"></a><br/>
+				Monto a transferir: 					<input class="w3-input	" type="number" onchange="validateAmount()" oninput="validateDecimals()"  step = any id="amount"><br/>
+				<!--Clave del banco: <input type="text" required id="bank"><br/>-->
+				Pa&iacute;s: 							<select id = "country">
+															<option value = "MX">M&eacute;xico</option>
+															<option value = "US">Estados Unidos</option>
+														</select>
+														<br/><br/>
+				Divisa:									<select id = "currency">
+															<option value = "MXN">(MXN) Pesos Mexicanos</option>
+														</select>
+														<br/><br/>
+			</form>
+			<button  class="w3-btn w3-indigo w3-round-xlarge w3-center" type="button" onclick = parse()>Generar<a id = "genError"></a></button>
+			<div id="popup" class="w3-modal w3-padding">
+				<table class="w3-responsive" style="padding-left: 40%;">
+						<tr><td>
+								<div class="w3-modal-content w3-card-4 w3-animate-opacity">
+									
+										<header class="w3-container w3-blue w3-display-top">
+											<div style="height: initial;" onclick= "document.getElementById('popup').style.display='none'" class="w3-button w3-blue w3-display-topright">&times;</div>
+											<h5 class="w3-center">Aqui esta tu código QR</h5>
+										</header>
+										<br/>
+									<div class="w3-padding">
+										<center><div class="w3-padding" id="qrcode"></div></center>
+										<div id="inf"></div>
+									</div>
+								</div>
+						</td></tr>
+					</table>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+	var error = false;
+	var y = screen.height;
+	var x = screen.width;
+	var z;
+	if(y>x) z=y;
+	else    z=x;
+	z = (z/5)*2;
+	if(z>300) z=300;
+	var qrcode = new QRCode(document.getElementById("qrcode"), {
+	    text: "¡Hola!",
+	    width: z,
+	    height: z,
+	    colorDark : "#000000",
+	    colorLight : "#ffffff",
+	    correctLevel : QRCode.CorrectLevel.H
+	});
+
+	function validateAmount(){
+		var amount = document.getElementById("amount").value;
+		
+		if(amount != ""){
+			
+			if(amount < 10){
+				amount = 10.00;
+				document.getElementById("amount").value = amount.toFixed(2);
+			}	
+		}
+	}
+
+	function validateDecimals(){
+		var amount = document.getElementById("amount").value;
+
+		amount = amount.split(".")
+		if(amount.length > 1){
+			if (amount[1].length > 2){
+				amount[1] = amount[1][0] +""+amount[1][1];
+				var newAmount = amount[0]+"."+amount[1];
+				document.getElementById("amount").value = newAmount;
+			}
+		}
+
+		
+
+	}
+
+	function validateLength(min, max, source){
+	    var string = document.getElementById(source);
+
+	    if(!string.hasAttribute("required") && string.value.length == 0){
+	    	document.getElementById(source+"Error").innerHTML = "";
+	    }else if(string.value.length < min || string.value.length > max){
+	    	document.getElementById(source+"Error").innerHTML = "La longitud de este campo debe ser mayor a " +min+ " y menor a " + max;
+	    	error = true;
+	    }else{
+	    	document.getElementById(source+"Error").innerHTML = "";
+	    	error = false;
+	    }
+	    return error;
+	}
+
+	function validateInput(source){
+		var errorString = false;
+
+		var dict = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		var string = document.getElementById(source).value;
+		for (var i = 1; i < string.length; i++){
+			if(!dict.includes(string[i])){
+				console.log("Hay caracteres especiales!")
+				errorString = true;
+			}
+		}
+
+		return errorString;
+	}
+
+	function validateForm(){
+		var x = document.forms["entrada"];
+
+	    for(var i = 1; i < x.length ; i++){
+	    	if(i == 3) i++;
+	    	if(i == 5) i++;
+	    	if(x[i].value.length < 1){
+	    		return false;
+	    	}
+	    }
+	    return true;
+	}
+
+	function parse(){
+		var alias = document.getElementById("alias").value;
+		var cl = document.getElementById("cl").value;
+		var type = document.getElementById("type").value;
+		var refn = document.getElementById("refn").value;
+		var refa = document.getElementById("refa").value;
+		var amount = document.getElementById("amount").value;
+		var country = document.getElementById("country").value;
+		var currency = document.getElementById("currency").value;
+
+		if(!error && !validateInput("alias")){
+			if(validateForm()){
+				var parsed = '{"ot": "0001","dOp": [{"alias": "' + alias + '"},{"cl": "' + cl + '"},{"type": "' + type +'"},{"refn": "' + refn + '"},{"refa": "' + refa + '"},{"amount": "' + amount + '"},{"bank": "00012"},{"country": "' + country +'"},{"currency": "'+ currency +'"}]}';
+				generarQR(parsed);	
+			}		
+		}else{
+			console.log("ERROR");
+		}
+	}
+
+	function generarQR(parsed){
+		
+		document.getElementById("popup").style.display='block';
+		console.log(parsed);
+		qrcode.clear();
+		qrcode.makeCode(parsed);
+		var alias = document.getElementById("alias").value;
+		if(alias.length==0)	
+			alias = "N/a";
+		var refn = document.getElementById("refn").value;
+		if(refn.length==0)	
+			refn = "N/a";
+		var amount = document.getElementById("amount").value;
+		if(amount.length==0)	
+			amount = "N/a";
+		var info = document.getElementById("inf");
+		var str = 	'<br><table class="w3-table w3-bordered">'			+
+					"<tr><td>Motivo de pago: </td><td>" 	+ alias											+	"</td></tr>"	+
+					"<tr><td>CLABE: </td><td>"				+ document.getElementById("cl").value			+	"</td></tr>"	+		
+					"<tr><td>Cuenta: </td><td>" 			+ document.getElementById("type").value			+	"</td></tr>"	+		
+					"<tr><td>Referencia: </td><td>" 		+ refn											+	"</td></tr>"	+	
+					"<tr><td>Beneficiario: </td><td>" 		+ document.getElementById("refa").value			+	"</td></tr>"	+
+					"<tr><td>Monto a transferir: </td><td>" + amount										+	"</td></tr>"	+
+					"<tr><td>País: </td><td>" 				+ document.getElementById("country").value		+	"</td></tr>"	+
+					"<tr><td>Divisa: </td><td>"            	+ document.getElementById("currency").value		+	"</td></tr>"	+
+					"</table><br>";
+		info.innerHTML = str;
+
+		//onclick="generatePDF(getQrImage());"
+	}
+
+	function generatePDF(image){
+
+
+		var doc = new jsPDF();
+
+		doc.setFontSize(20);
+		doc.text(35, 25, 'Código generado por ParQR');
+		doc.addImage(image, 'JPEG', 40, 40, 130, 130);
+		
+
+		var alias = document.getElementById("alias").value;
+		if(alias.length==0)	
+			alias = "No especificado";
+		var refn = document.getElementById("refn").value;
+		if(refn.length==0)	
+			refn = "No especificado";
+		var amount = document.getElementById("amount").value;
+		if(amount.length==0)	
+			amount = "No especificado";
+		
+		doc.setFontSize(15);
+		
+		doc.text(35, 207, "Motivo de pago: " + alias);
+		doc.text(35, 214, "CLABE: " + document.getElementById("cl").value);
+		doc.text(35, 221, "Cuenta: " + document.getElementById("type").value);
+		doc.text(35, 228, "Referencia: " + refn);
+		doc.text(35, 235, "Beneficiario: "+document.getElementById("refa").value);
+		doc.text(35, 242, "Monto: " + amount);
+		doc.text(35, 249, "País: " + document.getElementById("country").value);
+		doc.text(35, 256, "Divisa: " + document.getElementById("currency").value);
+		doc.save('a4.pdf');
+
+	}
+
+	function getQrImage() {
+	    var allImages = document.getElementsByTagName("img");
+	    var qrimage;
+	    for (var i = 0, len = allImages.length; i < len; ++i) {
+	        if (allImages[i].alt == "codigoqr") {
+	            console.log("Found!")
+	            qrimage = allImages[i];
+	        }
+	    }
+	    return qrimage.getAttribute("src");
+	}
+
+</script>
+
+</html>
+
+
+
+
