@@ -11,9 +11,9 @@
 	 <!--href="w3.css"-->
 </head>
 
-<body>
+<body style='background-color:#EAF9FA ;'>
 	<div class="w3-container w3-padding-large">
-		<div class="w3-card-2">
+		<div class="w3-card-2" style="background-color: #F4F4F4 ;">
 			<header class="w3-container w3-blue">
 			  <h4>¡Bienvenido! / Por favor escriba la información para la transacción</h4	>
 			</header>
@@ -68,8 +68,8 @@
 	var error = false;
 	var qrcode = new QRCode(document.getElementById("qrcode"), {
 	    text: "¡Hola!",
-	    width: 256,
-	    height: 256,
+	    width: 400,
+	    height: 400,
 	    colorDark : "#000000",
 	    colorLight : "#ffffff",
 	    correctLevel : QRCode.CorrectLevel.H
