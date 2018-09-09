@@ -71,8 +71,8 @@
 	var z;
 	if(y>x) z=y;
 	else    z=x;
-	z = z/3;
-	if(z>260) z=260;
+	z = (z/5)*2;
+	if(z>300) z=300;
 	var qrcode = new QRCode(document.getElementById("qrcode"), {
 	    text: "¡Hola!",
 	    width: z,
