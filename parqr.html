@@ -6,7 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>ParQR</title>
 	<script type="text/javascript" src = "qrcode.js"></script>
-	 <link rel="stylesheet" href="w3.css"> 
+	 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3mobile.css"> 
+	 <!--href="w3.css"-->
 </head>
 
 <body>
@@ -28,7 +29,7 @@
 														<br/><br/>
 				Referencia num&eacute;rica: 			<input class="w3-input	" oninput="validateLength(6, 7,'refn')" type="text" id="refn"><a id ="refnError"></a><br/>
 				Nombre de beneficiario (sin apellidos): <input class="w3-input	" type="text" oninput="validateLength(3, 20, 'refa')" required id="refa"><a id = "refaError"></a><br/>
-				Monto a transferir: 					<input class="w3-input	" type="number" min="10" max="10000" onchange="validateAmount()" oninput="validateDecimals()"  step = any id="amount"><br/>
+				Monto a transferir: 					<input class="w3-input	" type="number" onchange="validateAmount()" oninput="validateDecimals()"  step = any id="amount"><br/>
 				<!--Clave del banco: <input type="text" required id="bank"><br/>-->
 				Pa&iacute;s: 							<select id = "country">
 															<option value = "MX">M&eacute;xico</option>
@@ -79,8 +80,8 @@
 		if(amount != ""){
 			
 			if(amount < 10){
-				amount = 10;
-				document.getElementById("amount").value = amount;
+				amount = 10.00;
+				document.getElementById("amount").value = amount.toFixed(2);
 			}	
 		}
 	}
@@ -94,8 +95,10 @@
 				amount[1] = amount[1][0] +""+amount[1][1];
 				var newAmount = amount[0]+"."+amount[1];
 				document.getElementById("amount").value = newAmount;
-			}	
+			}
 		}
+
+		
 
 	}
 
