@@ -18,7 +18,7 @@
 		<div class="w3-col s1 m2 l3"><br></div>
 		<div class="w3-col s10 m8 l6 w3-card-2 w3-center" style="background-color: #F4F4F4 ;">
 			<header class="w3-container w3-blue">
-			  <h4>¡Bienvenido! / Por favor escriba la información para la transacción</h4	>
+			  <h4>¡Bienvenido al generador de códigos QR BBVA Bancomer!</h4	>
 			</header>
 			<table class="w3-table"><tr><td>
 			<form name="entrada" class="w3-container">
@@ -39,46 +39,47 @@
 				</tr>
 				<!--Tipo de cuenta: <input type="text" required id="type"><br/>-->
 				<tr>
-					<td>Tipo de cuenta:</td> 						<td><select class="w3-select" id = "type">
+					<td>Tipo de cuenta:							<select class="w3-select" id = "type">
 																			<option value = "TC">Tarjeta</option>
 																			<option value = "CL">Clabe interbancaria</option>
 																	</select></td>
 				</tr>
 				<tr>
-					<td colspan="2">Referencia num&eacute;rica: </td>
+					<td>Referencia num&eacute;rica: </td>
 				</tr>			
 				<tr>
-					<td colspan="2"><input class="w3-input	" oninput="validateLength(6, 7,'refn')" type="text" id="refn"><a id ="refnError"></a></td>
+					<td><input class="w3-input	" oninput="validateLength(6, 7,'refn')" type="text" id="refn"><a id ="refnError"></a></td>
 				</tr>
 				<tr>
-					<td colspan="2">Nombre de beneficiario (sin apellidos):</td>
+					<td>Nombre de beneficiario (sin apellidos):</td>
 				</tr>
 				<tr>
-					<td colspan="2"><input class="w3-input	" type="text" oninput="validateLength(3, 20, 'refa')" required id="refa"><a id = "refaError"></a></td>
+					<td><input class="w3-input	" type="text" oninput="validateLength(3, 20, 'refa')" required id="refa"><a id = "refaError"></a></td>
 				</tr>
 				<tr>
-					<td colspan="2">Monto a transferir:</td>
+					<td>Monto a transferir:</td>
 				</tr> 					
 				<tr>
-					<td colspan="2"><input class="w3-input	" type="number" onchange="validateAmount()" oninput="validateDecimals()"  step = any id="amount"></td>
+					<td><input class="w3-input	" type="number" onchange="validateAmount()" oninput="validateDecimals()"  step = any id="amount"></td>
 				</tr>
 				<!--Clave del banco: <input type="text" required id="bank"><br/>-->
 				<tr>
-					<td>Pa&iacute;s:</td> 							<td><select class="w3-select" onchange = "cambiarDivisa()" id = "country">
+					<td>Pa&iacute;s: 							<select class="w3-select" onchange = "cambiarDivisa()" id = "country">
 																			<option value = "MX">M&eacute;xico</option>
 																			<option value = "US">Estados Unidos</option>
 																	</select></td>
 				</tr>
 				<tr>
-					<td>Divisa:</td>								<td><select class="w3-select" id = "currency">
+					<td>Divisa:									<select class="w3-select" id = "currency">
 																			<option value = "MXN">(MXN) Pesos Mexicanos</option>
 																			<option calue = "USD">(USD) D&oacute;lares</option>
 																	</select></td>
 				</tr>
+				<tr>
+					<td><center><button  class="w3-btn w3-blue w3-round w3-center" type="button" style="background-color: #ffffff;" onclick = "parse();"> 	- Generar - <a id = "genError"></a></button></center></td>
+				</tr>
 				</table>
 			</form>
-			<center><button  class="w3-btn w3-blue w3-round w3-center" type="button" style="background-color: #ffffff;" onclick = "parse();">Generar<a id = "genError"></a></button></center>
-			<br><br>
 			</td></tr></table>
 			<center>
 			<div id="popup" class="w3-modal w3-padding">
