@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>ParQR</title>
 	<script type="text/javascript" src = "qrcode.js"></script>
+	<script type="text/javascript" src = "jspdf.min.js"></script>
 
 	 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3mobile.css"> 
 	 <link rel="stylesheet" href="w3.css"> 
@@ -194,6 +195,28 @@
 					"<tr><td>Divisa: </td><td>"            	+ document.getElementById("currency").value		+	"</td></tr>"	+
 					"</table><br>";
 		info.innerHTML = str;
+
+		var qrImage = getQrImage();
+
+		var doc = new jsPDF();
+
+		doc.setFontSize(40);
+		doc.text(35, 25, 'PDF Generado');
+		doc.addImage(qrImage, 'JPEG', 15, 40, 160, 160);
+		doc.save('a4.pdf');
+	}
+
+
+	function getQrImage() {
+	    var allImages = document.getElementsByTagName("img");
+	    var qrimage;
+	    for (var i = 0, len = allImages.length; i < len; ++i) {
+	        if (allImages[i].alt == "codigoqr") {
+	            console.log("Found!")
+	            qrimage = allImages[i];
+	        }
+	    }
+	    return qrimage.getAttribute("src");
 	}
 
 </script>
